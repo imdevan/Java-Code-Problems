@@ -17,6 +17,7 @@ public class Main {
         Stack<Integer> s = new Stack<Integer>();
 
         q.add(tree);
+        s.push(1);
 
         while(i < q.size())
         {
@@ -35,28 +36,44 @@ public class Main {
             }
             if(clc == 0)
             {
-                s.push(nlc);
+                if(nlc != 0)
+                    s.push(nlc);
+
                 clc = nlc;
                 nlc = 0;
             }
+            i++;
         }
 
-        int printCurrentLast = q.size()-1;
+        int printCurrentLast = q.size();
         int printCurrentFirst =  q.size()-1;
-        while(printCurrentFirst >= 0)
+        while(printCurrentFirst > 0)
         {
             printCurrentFirst = printCurrentLast - s.pop();
 
             for(int j = printCurrentFirst; j < printCurrentLast; j++)
-                print(q.get(j) + " ");
+                print(q.get(j).val + " ");
 
             print("\n");
             printCurrentLast = printCurrentFirst;
         }
-
-
     }
     public static void main(String[] args) {
-	// write your code here
+        Node t = new Node();
+        t.add(3);
+        t.add(2);
+        t.add(1);
+        t.add(6);
+        t.add(5);
+        t.add(4);
+        t.add(2);
+
+        System.out.println("Tree Test: ");
+        t.print();
+
+        print("\n\n");
+
+        System.out.println("Tree Level Order Print Test: ");
+        printReverseLevelOrder(t);
     }
 }
