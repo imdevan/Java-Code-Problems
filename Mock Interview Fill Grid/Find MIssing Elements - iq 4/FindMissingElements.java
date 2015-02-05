@@ -55,7 +55,7 @@ public class FindMissingElements{
 	}
 
 	public static void main(String [] args){
-		int [] a1 = {1, 2, 3, 5, 6, 13, 25, 11, 23}; 
+		int [] a1 = {1, 2, 3, 5, 6, 13, 25, 11, 23, 23};
 		int [] a2 = {1, 2, 3, 5, 6, 13, 11, 23}; 
 
 		// Should return 25

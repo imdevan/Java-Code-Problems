@@ -36,7 +36,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Test String
-        String test = "hello";
+        String test = "alm";
 
         // Result
         System.out.print(findAllPermuations(test).toString());

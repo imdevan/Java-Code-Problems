@@ -1,106 +1,58 @@
 package com.company;
+// Write a function condense_meeting_times() that takes an array of meeting time ranges
+// and returns an array of condensed ranges.
 
-import java.lang.reflect.Array;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+//   Example:  [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+//   Returns:  [(0, 1), (3, 8), (9, 12)]
+
+//   Simpler:
+//   Example:  [(3, 5), (4, 8), (10, 12), (9, 10)]
+//   Returns:  [(3, 8), (9, 12)]
 public class Main {
 
-    public  static void constructGraph(Graph graph, String[] dict, char[] alphabet)
-    {
-        // Initialize temporary strings
-        String remove, change, add;
+    private static Integer[][] condense_meeting_times(Integer[][] mt){
+        // working set
+        ArrayList<Integer[]> ws = new ArrayList<Integer[]>();
+        boolean found = false;
 
-        // Clear graph and add dictionary
-        graph.clear();
-        graph.addArray(dict);
-
-        // Make connections in graph
-        for(String word : dict)
+        for(int i = 0; i < mt.length; i++)
         {
-            for(int i = 0; i < word.length(); i++)
+            Integer[] c = mt[i];
+            for(Integer[] p : ws) // p = pair
             {
-                // Remove 1 Character
-                remove = word.substring(0,i) + word.substring(i + 1);
-                if(graph.contains(remove) && !remove.equals(word))
-                    graph.setSiblings(word, remove);
-
-                // Change 1 character
-                for(char c : alphabet)
+                if(p[0] <= c[0] || c[0] <=   p[1] ||p[0] <= c[1] || c[1] <=   p[1] )
                 {
-                    change = word.substring(0,i) + c + word.substring(i+1);
-                    if(graph.contains(change)  && !change.equals(word))
-                        graph.setSiblings(word, change);
+                    p[0] = Math.min(c[0], p[0]);
+                    p[1] = Math.max(c[1], p[1]);
+                    found = true;
+                    break;
                 }
             }
-
-            // Add 1 character
-            for(int i = 0; i < word.length()+1; i ++)
-            {
-                for(char c : alphabet)
-                {
-                    add = word.substring(0,i) + c + word.substring(i);
-                    if(graph.contains(add))
-                        graph.setSiblings(word, add);
-                }
-            }
-        }
-    }
-
-    public static Vector<String> transformWord(Graph graph, String src, String trgt){
-
-        if(graph.nodeList.size() == 0 || !graph.contains(src) || !graph.contains(src))
-            return new Vector<String>();
-
-
-        ArrayDeque<Vector<String>> paths = new ArrayDeque<Vector<String>>();
-        Vector<String> currentPath;
-        Vector<String> tempPath;
-        HashSet<String> seen = new HashSet<String>();
-        String currentWord;
-
-
-        currentPath = new Vector<String>();
-        currentPath.add(src);
-        paths.add(currentPath);
-
-        while(paths.size() != 0){
-            currentPath = paths.pollFirst();
-            currentWord = currentPath.lastElement();
-
-            if(currentWord.equals(trgt))
-                return currentPath;
-            else if(seen.contains(currentWord))
-                continue;
-
-            seen.add(currentWord);
-            for(String word : graph.nodeList.get(currentWord).siblings)
-                    if(!currentPath.contains(word))
-                    {
-
-                        tempPath = (Vector)currentPath.clone();
-                        tempPath.add(word);
-                        paths.addLast(tempPath);
-                    }
+            if(found)
+                found = false;
+            else
+                ws.add(c);
         }
 
-        return new Vector<String>();
-    }
 
+        // Return as array
+        Integer[][] r = new Integer[ws.size()][2];
+        for(int i = 0; i < ws.size(); i++)
+            r[i] = ws.get(i);
+        return r;
+    }
     public static void main(String[] args) {
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        String[] dictionary = {"at","cat",  "bet", "bat", "ad", "ed", "bed"};
+	// write your code here
+        Integer[][] test = {{0, 1}, {3, 5}, {4, 8}, {10, 12}, {9, 10}};
+        Integer[][] result = condense_meeting_times(test);
 
-        Graph testGraph = new Graph();
+        for(int i = 0; i < result.length; i++)
+        {
+            System.out.printf("(%d, %d)", result[i][0], result[i][1]);
+        }
 
-        constructGraph(testGraph, dictionary, alphabet);
-
-        // Print testGraph
-        testGraph.print();
-
-        Vector<String> path = transformWord(testGraph, "cat", "bed");
-        System.out.println(path);
     }
 }

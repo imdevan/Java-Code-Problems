@@ -34,4 +34,15 @@ public class Node {
         System.out.print(next.val + " ");
         next.print();
     }
+
+    // Print reverse
+    public void printr(){
+        if(next == null)
+            return;
+
+        next.printr();
+
+
+        System.out.print(next.val + " ");
+    }
 }

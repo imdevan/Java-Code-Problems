@@ -28,6 +28,14 @@ public class Main {
         testList.add(2);
         testList.add(5);
 
+        // Print test
+
+        System.out.println("Test List");
+        testList.printr();
+
+        System.out.println("Test List");
+
+        testList.print();
         // Print initial test case
         System.out.println("Test List");
         testList.print();
