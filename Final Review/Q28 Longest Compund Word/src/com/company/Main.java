@@ -20,8 +20,9 @@ public class Main {
             {
                 longestCompoundWord = word;
                 pal = trie.getAllPrefexisOfWord(word);
-                for(String s: pal)
-                    println(s + " " + s.length());
+               // Print prefixes for testing
+               // for(String s: pal)
+               //     println(s + " " + s.length());
             }
         }
 

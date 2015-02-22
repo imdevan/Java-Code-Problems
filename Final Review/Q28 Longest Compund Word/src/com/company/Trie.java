@@ -37,7 +37,7 @@ public class Trie {
     }
     public ArrayList<String> getAllPrefexisOfWord(String word)
     {
-        String prefix = "";
+        StringBuilder prefix = new StringBuilder();
         ArrayList<String> prefixes = new ArrayList<String>();
         Trie current = this;
         for(int i = 0; i < word.length(); i++)
@@ -46,9 +46,9 @@ public class Trie {
             if(!current.children.containsKey(letter))
                 return prefixes;
             current = current.children.get(letter);
-            prefix += letter;
+            prefix.append(letter);
             if(current.isTerminal)
-                prefixes.add(prefix);
+                prefixes.add(prefix.toString());
         }
         return prefixes;
     }
@@ -60,6 +60,7 @@ public class Trie {
         else
             System.out.println(s);
     }
+
     private void print(String s){
         System.out.print(s);
     }
