@@ -24,9 +24,9 @@ public class Main {
 
         // Iterate across comments and add to hashmap
         for(Comment c : ca)
-            if(cMap.containsKey(c.parentId)){
+            if(cMap.containsKey(c.parentId))
                 cMap.get(c.parentId).add(c);
-            } else{
+            else{
                 cMap.put(c.parentId, new ArrayList<Comment>());
                 cMap.get(c.parentId).add(c);
             }
