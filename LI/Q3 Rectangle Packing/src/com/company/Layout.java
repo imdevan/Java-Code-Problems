@@ -10,24 +10,25 @@ import java.util.HashMap;
 public class Layout {
     Boolean [][] space;
     ArrayList<Rect> rFit;
-    int height, width, spaceRemaining;
+    int height, width, area, spaceRemaining;
     HashMap<Pos, Rect> notFilled;
 
     /**
      * Constructor
      */
     public Layout(int height, int width){
-        space = new Boolean[height][width];
+        this.space = new Boolean[height][width];
         this.height = height;
         this.width = width;
-        spaceRemaining = height * width;
-        rFit = new ArrayList<Rect>();
+        this.area = height * width;
+        this.spaceRemaining = height * width;
+        this.rFit = new ArrayList<Rect>();
 
         /**
          * Initiate not filled with a rectangle at 0,0
          */
-        notFilled = new HashMap<Pos, Rect>();
-        notFilled.put(new Pos(0, 0), new Rect(height, width));
+        this.notFilled = new HashMap<Pos, Rect>();
+        this.notFilled.put(new Pos(0, 0), new Rect(height, width));
     }
 
     /**
