@@ -7,8 +7,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        int[] testArray = {4,2,3,1};
-        int k = 2;
+        int[] testArray = {4,2,3,1,5,6,10,7,8,9};
+        int k = 5;
         int result = findKthLargestElement(testArray, k);
 
         System.out.println(result);
@@ -47,7 +47,7 @@ public class Main {
         if(rank == k)
             return a[si];
         else if(rank < k)
-            return findKthLargestElement(a, si, end, k);
+            return findKthLargestElement(a, si+1, end, k);
         else
             return findKthLargestElement(a, start, si, k);
     }
